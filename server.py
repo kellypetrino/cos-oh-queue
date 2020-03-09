@@ -24,10 +24,6 @@ def home():
     return render_template("index.html")
 
 
-if __name__ == '__main__':
-    # if len(argv) >= 3 and argv[1] == '--server':
-    #     app.config['CAS_SERVER'] = argv[2]
-    # app.secret_key = 'super secret key'
-    # app.config['SESSION_TYPE'] = 'filesystem'
-    # app.debug = True
-    app.run()
+if __name__ == "__main__":
+    PORT = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, port=PORT, host='0.0.0.0')
