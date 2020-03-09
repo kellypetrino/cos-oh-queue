@@ -1,4 +1,4 @@
-from os import path, getcwd
+import os
 from sys import argv
 
 from flask import Flask, render_template, session, redirect, send_from_directory
