@@ -109,7 +109,7 @@ def main():
 
 @app.route("/home")
 def home():
-    return "yikes %s" % cas.username
+    return "yikes %s" % cas.username 
     # return render_template("index.html")
 
 
