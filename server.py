@@ -12,17 +12,14 @@ app.config['CAS_AFTER_LOGIN'] = 'home'
 
 # DATABASE_URL = 'postgres://bgeduosfkxunua:79c8ea392b4ee24827466fffa6186fcd606e8fd61aed0f72474965c5058c00da@ec2-54-80-184-43.compute-1.amazonaws.com:5432/dbratmlm42smtt'
 
-# C = CASClient.CASClient()
-# netid = C.Authenticate()
-
 @app.route("/")
 @login_required
 def route_root():
-    return "Testing %s" % cas.attributes['cas:displayName']
+    return "Testing %s" % cas.username
 
 @app.route("/splash")
 def main():
-    return "Hello %s" % netid
+    return "SPLASH PAGE GOES HERE"
     # return render_template("splash.html")
 
 @app.route("/home")
