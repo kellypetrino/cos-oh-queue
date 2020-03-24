@@ -7,7 +7,8 @@ import flask
 from flask import Flask, render_template, session, redirect, send_from_directory
 from flask_cas import CAS, login_required, login, logout
 
-from forms.py import SignUpForm
+from flask_wtf import FlaskForm
+from wtforms import StringField, SelectField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -24,6 +25,13 @@ app.config['CAS_AFTER_LOGIN'] = 'home'
 def main():
     # return "SPLASH PAGE GOES HERE"
     return render_template("splash.html")
+
+class SignUpForm(FlaskForm):
+    name = StringField('Name')
+    prob = SelectField('Problem Type', choices=[('conc','Conceptual'), ('debug', 'Debugging')])
+    time = SelectField('Estimated Time', choices=[('5', 'Quick'), ('9', 'Medium'), ('12', 'Long')])
+    descrip = StringField('Description')
+    submit = SubmitField('Submit')
 
 @app.route("/home")
 @login_required
