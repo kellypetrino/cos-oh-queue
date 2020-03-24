@@ -56,7 +56,10 @@ def home():
         conn.commit()
     cursor.execute("SELECT name, prob, descrip FROM queue")
     queue = cursor.fetchall()
-    return render_template("index.html", netid=cas.username, form=form, queue=queue)
+    wait = 0
+    for stu in queue:
+        wait = wait + int(stu["time"])
+    return render_template("index.html", netid=cas.username, form=form, queue=queue, wait=wait)
 
 
 if __name__ == "__main__":
