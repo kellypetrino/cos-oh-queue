@@ -54,7 +54,7 @@ def home():
         result = request.form
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s)", (result["name"], result["prob"], result["time"], result["descrip"]))
         conn.commit()
-    cursor.execute("SELECT name, prob, descrip FROM queue")
+    cursor.execute("SELECT name, prob, time, descrip FROM queue")
     queue = cursor.fetchall()
     wait = 0
     for stu in queue:
