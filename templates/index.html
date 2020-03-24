@@ -59,9 +59,9 @@
         <li><a href="#">About</a></li>
         <li><a href="#">People</a></li>
       </ul>
-      <!-- <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul> -->
+      </ul>
     </div>
   </div>
 </nav>
@@ -94,9 +94,20 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Current Queue</h1>
-      <p>Insert a list object that retrieves queue from the DB here.</p>
-      <hr>
-      <h3>Metrics</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Problem Type</th>
+          <th>Description</th>
+        </tr>
+        {% for name,prob,descrip in queue.items() %}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{prob}}</td>
+          <td>{{descrip}}</td>
+        </tr>
+        {% endfor %}
+      </table>
       <p>Possible metrics go here?</p>
     </div>
     <div class="col-sm-2 sidenav">
