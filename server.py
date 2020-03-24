@@ -28,7 +28,7 @@ cursor.execute(
     CREATE TABLE queue (
         name VARCHAR(50) NOT NULL PRIMARY KEY,
         prob VARCHAR(50) NOT NULL,
-        time INTEGER NOT NULL,
+        time VARCHAR(10) NOT NULL,
         descrip VARCHAR(100)
     )"""
 )
@@ -52,7 +52,7 @@ def home():
     form = SignUpForm()
     if form.is_submitted():
         result = request.form
-        cursor.execute("INSERT INTO queue VALUES (%s, %s, %d, %s)", (result["name"], result["prob"], result["time"], result["descrip"]))
+        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s)", (result["name"], result["prob"], result["time"], result["descrip"]))
         conn.commit()
     cursor.execute("SELECT name, prob, descrip FROM queue")
     queue = cursor.fetchall()
