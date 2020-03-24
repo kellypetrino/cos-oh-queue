@@ -58,7 +58,7 @@ def home():
     queue = cursor.fetchall()
     wait = 0
     for stu in queue:
-        wait = wait + int(stu["time"])
+        wait = wait + int(stu[2])
     return render_template("index.html", netid=cas.username, form=form, queue=queue, wait=wait)
 
 
