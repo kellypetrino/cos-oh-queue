@@ -52,7 +52,7 @@ def home():
     form = SignUpForm()
     if form.is_submitted():
         result = request.form
-        cursor.execute("INSERT INTO queue VALUES ('%s', '%s', %s. '%s'", (str(result("name")), str(result("prob")), str(result("time")), str(result("descrip"))))
+        cursor.execute("INSERT INTO queue VALUES ('%s', '%s', %s. '%s'", (result["name"], result["prob"], result["time"], result["descrip"]))
         conn.commit()
     cursor.execute("SELECT name, prob, descrip FROM queue")
     queue = cursor.fetchall()
