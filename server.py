@@ -12,14 +12,14 @@ from forms import SignUpForm, RemoveForm
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-# cas = CAS(app)
-# app.config['CAS_SERVER'] = 'https://fed.princeton.edu/'
-# app.config['CAS_AFTER_LOGIN'] = 'home'
+cas = CAS(app)
+app.config['CAS_SERVER'] = 'https://fed.princeton.edu/'
+app.config['CAS_AFTER_LOGIN'] = 'home'
 
  
-conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
-# DATABASE_URL = 'postgres://bgeduosfkxunua:79c8ea392b4ee24827466fffa6186fcd606e8fd61aed0f72474965c5058c00da@ec2-54-80-184-43.compute-1.amazonaws.com:5432/dbratmlm42smtt'
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
+DATABASE_URL = 'postgres://bgeduosfkxunua:79c8ea392b4ee24827466fffa6186fcd606e8fd61aed0f72474965c5058c00da@ec2-54-80-184-43.compute-1.amazonaws.com:5432/dbratmlm42smtt'
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 cursor = conn.cursor()
 conn.commit()
@@ -48,7 +48,7 @@ def main():
 
 
 @app.route("/home", methods=['GET','POST'])
-# @login_required
+@login_required
 def home():
     form = SignUpForm()
     form2 = RemoveForm()
