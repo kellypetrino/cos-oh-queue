@@ -15,6 +15,7 @@ app.secret_key = os.urandom(24)
 cas = CAS(app)
 app.config['CAS_SERVER'] = 'https://fed.princeton.edu/'
 app.config['CAS_AFTER_LOGIN'] = 'home'
+app.config['CAS_AFTER_LOGOUT'] = ''
 
  
 # conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
@@ -48,7 +49,7 @@ def main():
 
 
 @app.route("/home", methods=['GET','POST'])
-@login_required
+# @login_required
 def home():
     form = SignUpForm()
     form2 = RemoveForm()
