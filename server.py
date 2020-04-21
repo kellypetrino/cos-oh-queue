@@ -102,6 +102,7 @@ def home():
     if form.is_submitted() and not inqueue:
         queue = get_queue()
         result = request.form.to_dict()
+        result["descrip"] = form.descrip.data
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, form.name.data, form.prob.data, form.time.data, form.descrip.data))
         conn.commit()
         # get match 
@@ -115,12 +116,6 @@ def home():
                     match = stu
             return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     
-    # form to remove self submitted
-    # elif form2.is_submitted() and inqueue:
-    #     result = request.form
-    #     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
-    #     conn.commit()
-    
     return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 @app.route("/remove_self/<netid>")
@@ -133,11 +128,6 @@ def remove_self(netid):
 @app.route("/ta_portal", methods=['GET','POST'])
 @login_required
 def ta_portal():
-    # form = RemoveForm()
-    # if form.is_submitted():
-    #     result = request.form
-    #     cursor.execute("DELETE FROM queue WHERE netid = '%s'" % result["netid"])
-    #     conn.commit()
     return render_template("ta_portal.html", queue=get_queue(), wait=get_wait())
 
 @app.route("/remove/<netid>")
