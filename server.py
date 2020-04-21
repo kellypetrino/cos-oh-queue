@@ -43,12 +43,12 @@ cursor.execute(
 conn.commit()
 
 # Create database of instructors
-cursor.execute("DROP TABLE IF EXISTS instructors")
-conn.commit()
-cursor.execute("CREATE TABLE instructors (netid VARCHAR(50) NOT NULL PRIMARY KEY,)")
-conn.commit()
-cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
-conn.commit()
+# cursor.execute("DROP TABLE IF EXISTS instructors")
+# conn.commit()
+# cursor.execute("CREATE TABLE instructors (netid VARCHAR(50) NOT NULL PRIMARY KEY,)")
+# conn.commit()
+# cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
+# conn.commit()
 
 # Create a key-value store of problem descriptions
 problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
