@@ -95,12 +95,12 @@ def home():
                 if sim_temp > sim:
                     sim = sim_temp
                     match = stu
-            return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
+            return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     elif form2.is_submitted() and inqueue:
         result = request.form
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
         conn.commit()
-    return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
+    return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
