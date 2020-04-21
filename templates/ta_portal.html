@@ -83,34 +83,38 @@
             <!-- <span class="subheading">Our Services</span> -->
             <h2 class="mb-4">Current Queue</h2>
             <h5>Estimated Wait Time: {{wait}}</h5>
+            <table>
+                <tr>
+                  <th> Name </th>
+                  <th> Problem </th>
+                  <th> Description </th>
+                  <th> Remove? </th>
+                </tr>
+                {% for netid,name,prob,time,descrip in queue %}
+                <tr>
+                  <td> {{name}} </td>
+                  <td> {{prob}} </td>
+                  <td> {{descrip}} </td>
+                  <td> 
+                    <!-- <form action="" method="post">
+                    <p>{{form2.netid(value=netid)}}</p>
+                    <p>{{form2.submit()}}</p></form>  -->
+                    <!-- <button onclick="{{url_for('remove_self', netid=mynetid)}};"></button> -->
+                    <p><a href="{{url_for('remove', netid=netid)}}" class="reply">Remove</a></p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
           </div>
         </div>
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">    
             <div class="media block-6 services d-block text-center">
-                <
+                
             </div> 
           </div>
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
-                <table>
-                    <tr>
-                      <th> Name </th>
-                      <th> Problem </th>
-                      <th> Description </th>
-                      <th> Remove? </th>
-                    </tr>
-                    {% for netid,name,prob,time,descrip in queue %}
-                    <tr>
-                      <td> {{name}} </td>
-                      <td> {{prob}} </td>
-                      <td> {{descrip}} </td>
-                      <td> 
-                        <p><a href="{{url_for('remove', netid=netid)}}" class="reply">Remove</a></p>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </table>
             
             </div>      
           </div>
