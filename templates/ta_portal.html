@@ -85,17 +85,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4 mb-5 ftco-animate">
-              <div class="block-10 text-center">
-                
-              </div>
-            </div>
             <div class="col-md-4 mb-5 test-center ftco-animate">
               <div class="block-10">
                 <table>
                     <tr>
                       <th> Name </th>
                       <th> Problem </th>
+                      <th> Time </th>
                       <th> Description </th>
                       <th> Remove? </th>
                     </tr>
@@ -103,6 +99,7 @@
                     <tr>
                       <td> {{name}} </td>
                       <td> {{prob}} </td>
+                      <td> {{time}} </td>
                       <td> {{descrip}} </td>
                       <td> 
                         <p><a href="{{url_for('remove', netid=netid)}}" class="reply">Remove</a></p>
@@ -112,17 +109,12 @@
                   </table>
               </div>
             </div>
-            <div class="col-md-4 mb-5 text-center ftco-animate">
-              <div class="block-10">
-                
-              </div>
-            </div>
+          </div>
             <div class="row justify-content-center mb5-pb5">
                 <div class="col-md-6 text-center ftco-animate">
                     <p><a href="{{url_for('remove_all')}}" class="btn btn-primary btn-outline-primary py-3 px-5">Clear All Students</a></p>
                 </div>
             </div>
-          </div>
         </div>
       </div>
     
