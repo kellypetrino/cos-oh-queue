@@ -82,11 +82,11 @@ def home():
     form2 = RemoveForm()
 
     # check if already in queue
-    inqueue = False
+    inqueue = True
     cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid,))
     temp = cursor.fetchone()
-    if temp["netid"] == netid:
-        inqueue = True
+    if type(temp["netid"]) == None :
+        inqueue = False
 
     # form to join queue submitted
     if form.is_submitted() and not inqueue:
