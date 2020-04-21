@@ -69,7 +69,7 @@ def main():
 @app.route("/home", methods=['GET','POST'])
 @login_required
 def home():
-    netid = cas.username
+    netid = str(cas.username)
     form = SignUpForm()
     form2 = RemoveForm()
 
@@ -84,7 +84,7 @@ def home():
     if form.is_submitted() and not inqueue:
         queue = get_queue()
         result = request.form.to_dict()
-        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (str(netid), result["name"], result["prob"], result["time"], form.descrip.data))
+        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
         # get match 
         if len(queue) > 0: 
@@ -95,12 +95,12 @@ def home():
                 if sim_temp > sim:
                     sim = sim_temp
                     match = stu
-            return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
+            return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     elif form2.is_submitted() and inqueue:
         result = request.form
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid))
         conn.commit()
-    return render_template("index.html", netid = cas.username, form=form, form2=form2, queue=get_queue(), wait=get_wait())
+    return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
