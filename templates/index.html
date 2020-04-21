@@ -107,19 +107,16 @@
               </form>
             </div>
           </div>
-          <div class="col-md-4 mb-5 test-center ftco-animate">
-            <div class="block-10">
-              <table class="table-bordered">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+              <table class="table table-striped">
                 <tr>
                   <th> Name </th>
-                  <th> Problem </th>
                   <th> Description </th>
                   <th> Remove? </th>
                 </tr>
                 {% for netid,name,prob,time,descrip in queue %}
                 <tr>
                   <td> {{name}} </td>
-                  <td> {{prob}} </td>
                   <td> {{descrip}} </td>
                   {% if netid == mynetid %}
                   <td> 
@@ -131,7 +128,6 @@
                 </tr>
                 {% endfor %}
               </table>
-            </div>
           </div>
           <div class="col-md-4 mb-5 text-center ftco-animate">
             <div class="block-10">
