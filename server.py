@@ -117,7 +117,7 @@ def home():
 def remove_self(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
-    redirect(url_for(home))
+    return redirect(url_for(home))
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
@@ -134,13 +134,13 @@ def ta_portal():
 def remove(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
-    redirect(url_for(ta_portal))
+    return redirect(url_for(ta_portal))
 
 @app.route("/remove_all", method=['POST'])
 def remove_all():
     cursor.execute("DELETE * FROM queue")
     conn.commit()
-    redirect(url_for(ta_portal))
+    return redirect(url_for(ta_portal))
 
 def get_queue():
     cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
