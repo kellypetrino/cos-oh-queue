@@ -88,13 +88,13 @@
     
     <div class="ftco-section">
       <div class="container">
-        <div class="row justify-content-center mb-5 pb-2">
+        <div class="row justify-content-center mb-5 pb-1">
           <div class="col-md-7 text-center heading-section ftco-animate" padding-bottom="2em">
             <h2 class="mb-4">Join the Queue</h2>
             <p>Estimated Wait Time: {{wait}}</p>
           </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="block-10 text-center">
               <h4>Sign Up</h4>
@@ -109,7 +109,7 @@
                   {{form.time(class="form-control", placeholder="Time")}}
                 </div>
                 <div class="form-group">
-                  {{form.descrip(class="form-control selectpicker", placeholder="Description")}}
+                  {{form.descrip(class="selectpicker", placeholder="Description")}}
                 </div>
                 <div class="form-group">
                   {{form.submit(class="btn btn-primary btn-outline-primary py-3 px-5", value="Join Queue")}}
