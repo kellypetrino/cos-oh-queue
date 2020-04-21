@@ -160,6 +160,8 @@ def jaccard(a, b):
     cp = 0
     pa = 0
     ap = 0
+    print(a)
+    print(b)
     for i in problems:
         if str(i) in a["descrip"]:
             if str(i) in b[3]:
