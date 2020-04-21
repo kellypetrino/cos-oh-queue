@@ -131,7 +131,7 @@
                     <!-- <form action="" method="post">
                     <p>{{form2.netid(value=netid)}}</p>
                     <p>{{form2.submit()}}</p></form>  -->
-                    <button onclick="{{url_for(remove_self/mynetid)}};"></button>
+                    <button onclick="{{url_for('remove_self/%s' % mynetid)}};"></button>
                   </td>
                   {% else %}
                   <td></td>
