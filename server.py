@@ -122,7 +122,7 @@ def get_wait():
     queue = get_queue()
     wait = 0
     for stu in queue:
-        wait = wait + int(stu[2])
+        wait = wait + int(stu[3])
     return wait
 
 def jaccard(a, b):
