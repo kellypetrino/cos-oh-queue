@@ -14,8 +14,8 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 cas = CAS(app)
 app.config['CAS_SERVER'] = 'https://fed.princeton.edu/'
-app.config['CAS_AFTER_LOGIN'] = 'home'
-app.config['CAS_AFTER_LOGOUT'] = ''
+app.config['CAS_AFTER_LOGIN'] = '/home'
+app.config['CAS_AFTER_LOGOUT'] = '/'
 
  
 # conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
@@ -31,7 +31,8 @@ conn.commit()
 cursor.execute(
     """
     CREATE TABLE queue (
-        name VARCHAR(50) NOT NULL PRIMARY KEY,
+        netid VARCHAR(50) NOT NULL PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
         prob VARCHAR(50) NOT NULL,
         time VARCHAR(10) NOT NULL,
         descrip VARCHAR(100)
@@ -56,11 +57,11 @@ def home():
     if form.is_submitted():
         queue = get_queue()
         result = request.form.to_dict()
-        print(type(result))
-        print(result)
+        # print(type(result))
+        # print(result)
         # print(form.descrip.data)
         # print(type(form.descrip.data))
-        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s)", (result["name"], result["prob"], result["time"], form.descrip.data))
+        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (cas.username, result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
         if len(queue) > 0: 
             sim = 0
@@ -76,13 +77,13 @@ def home():
             return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     elif form2.is_submitted():
         result = request.form
-        cursor.execute("DELETE FROM queue WHERE name = '%s'" % result["name"])
+        cursor.execute("DELETE FROM queue WHERE netid = '%s'" % cas.username)
         conn.commit()
     return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
-#@login_required
+@login_required
 def ta_portal():
     form = RemoveForm()
     if form.is_submitted():
