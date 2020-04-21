@@ -321,6 +321,10 @@ h3, .h3 {
 h4, .h4 {
   font-size: 1.5rem; }
 
+h4, .side-prof {
+  color: #53A7A0;
+}
+
 h5, .h5 {
   font-size: 1.25rem; }
 
