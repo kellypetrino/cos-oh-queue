@@ -17,6 +17,8 @@ app.config['CAS_SERVER'] = 'https://fed.princeton.edu/'
 app.config['CAS_AFTER_LOGIN'] = '/home'
 app.config['CAS_AFTER_LOGOUT'] = '/'
 
+netid = ""
+
  
 # conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
 DATABASE_URL = 'postgres://bgeduosfkxunua:79c8ea392b4ee24827466fffa6186fcd606e8fd61aed0f72474965c5058c00da@ec2-54-80-184-43.compute-1.amazonaws.com:5432/dbratmlm42smtt'
@@ -52,16 +54,17 @@ def main():
 @app.route("/home", methods=['GET','POST'])
 @login_required
 def home():
+    netid = cas.username
     form = SignUpForm()
     form2 = RemoveForm()
-    if form.is_submitted():
+    if form.is_submitted() and form.validate():
         queue = get_queue()
         result = request.form.to_dict()
         # print(type(result))
         # print(result)
         # print(form.descrip.data)
         # print(type(form.descrip.data))
-        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (cas.username, result["name"], result["prob"], result["time"], form.descrip.data))
+        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (str(netid), result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
         if len(queue) > 0: 
             sim = 0
@@ -93,7 +96,7 @@ def ta_portal():
     return render_template("ta_portal.html", form=form, queue=get_queue(), wait=get_wait())
 
 def get_queue():
-    cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
+    cursor.execute("SELECT name, prob, time, descrip FROM queue")
     queue = cursor.fetchall()
     return queue
 
