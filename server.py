@@ -45,7 +45,7 @@ conn.commit()
 # Create a key-value store of problem descriptions
 problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
 
-Create a database for the problem descritions
+# Create a database for the problem descritions
 cursor.execute("DROP TABLE IF EXISTS problems")
 conn.commit()
 cursor.execute(
@@ -81,15 +81,12 @@ def home():
         inqueue = True
 
     
-    if form.is_submitted():
+    if form.is_submitted() and not inqueue:
         queue = get_queue()
         result = request.form.to_dict()
-        # print(type(result))
-        # print(result)
-        # print(form.descrip.data)
-        # print(type(form.descrip.data))
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (str(netid), result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
+        # get match 
         if len(queue) > 0: 
             sim = 0
             match = queue[0]
@@ -98,9 +95,6 @@ def home():
                 if sim_temp > sim:
                     sim = sim_temp
                     match = stu
-            # print(match)
-            # print(type(match))
-            # print(type(match[3]))
             return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     elif form2.is_submitted():
         result = request.form
