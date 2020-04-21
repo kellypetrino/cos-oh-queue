@@ -105,9 +105,11 @@
                       <td> {{name}} </td>
                       <td> {{prob}} </td>
                       <td> {{descrip}} </td>
-                      <td> <form action="" method="post">
+                      <td> 
+                          <!-- <form action="" method="post">
                         <p>{{form.netid(value=netid)}}</p>
-                        <p>{{form.submit()}}</p></form> 
+                        <p>{{form.submit()}}</p></form>  -->
+                        <button onclick="{{url_for('remove', netid=netid)}};"></button>
                       </td>
                     </tr>
                     {% endfor %}

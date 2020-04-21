@@ -92,7 +92,7 @@ def home():
     if form.is_submitted() and not inqueue:
         queue = get_queue()
         result = request.form.to_dict()
-        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, result["name"], result["prob"], result["time"], form.descrip.data))
+        cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, result.name.data, result.prob.data, result.time.data, form.descrip.data))
         conn.commit()
         # get match 
         if len(queue) > 0: 
