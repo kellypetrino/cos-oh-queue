@@ -120,7 +120,7 @@ def ta_portal():
     form = RemoveForm()
     if form.is_submitted():
         result = request.form
-        cursor.execute("DELETE FROM queue WHERE name = '%s'" % result["name"])
+        cursor.execute("DELETE FROM queue WHERE netid = '%s'" % result["netid"])
         conn.commit()
     return render_template("ta_portal.html", form=form, queue=get_queue(), wait=get_wait())
 
