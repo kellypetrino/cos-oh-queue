@@ -88,6 +88,9 @@
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
+              {% if alert %}
+              <script>join_once()</script>
+              {$ endif %}
               <h5>Sign Up</h5>
               <form action="" method="post">
                 <p>
@@ -179,6 +182,14 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+
+  <!-- Alert Box for joining queue only once -->
+  <script>
+    function join_once() {
+		     if(confirm("You can only join the queue once!")) {
+		     window.location='/home';
+	     	}
+  </script>
 
   <script src="/static/js/jquery.min.js"></script>
   <script src="/static/js/jquery-migrate-3.0.1.min.js"></script>

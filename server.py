@@ -64,6 +64,14 @@ def home():
         # print(result)
         # print(form.descrip.data)
         # print(type(form.descrip.data))
+
+        # check if already in queue
+        inqueue = False
+        cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid))
+        temp = cursor.fetchone()
+        if temp == netid:
+            alertbox = True
+            return render_template("index.html", netid = cas.username, form=form, form2=form2, queue=get_queue(), wait=get_wait(), alert=alertbox)
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (str(netid), result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
         if len(queue) > 0: 
