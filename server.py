@@ -113,7 +113,7 @@ def home():
     
     return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
-@app.route("/remove_self/<netid>", method=['POST'])
+@app.route("/remove_self/<netid>")
 def remove_self(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
@@ -130,13 +130,13 @@ def ta_portal():
     #     conn.commit()
     return render_template("ta_portal.html", queue=get_queue(), wait=get_wait())
 
-@app.route("/remove/<netid>", method=['POST'])
+@app.route("/remove/<netid>")
 def remove(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
     return redirect(url_for('ta_portal'))
 
-@app.route("/remove_all", method=['POST'])
+@app.route("/remove_all")
 def remove_all():
     cursor.execute("DELETE * FROM queue")
     conn.commit()
