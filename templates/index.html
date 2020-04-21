@@ -88,9 +88,6 @@
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
-              {% if alert %}
-              <script>join_once()</script>
-              {% endif %}
               <h5>Sign Up</h5>
               <form action="" method="post">
                 <p>
@@ -124,7 +121,7 @@
                   <th> Description </th>
                   <th> Remove? </th>
                 </tr>
-                {% for name,prob,time,descrip in queue %}
+                {% for netid,name,prob,time,descrip in queue %}
                 <tr>
                   <td> {{name}} </td>
                   <td> {{prob}} </td>
