@@ -89,10 +89,9 @@
             <div class="block-10 text-center">
               <h5>Sign Up</h5>
               <form action="" method="post">
-                <p>
-                  {{form.name.label}}<br>
-                  {{form.name()}}
-                </p>
+                <div class="form-group">
+                  {{form.name(class="form-control", placeholder="Name")}}
+                </div>
                 <p>
                   {{form.prob.label}}<br>
                   {{form.prob()}}
