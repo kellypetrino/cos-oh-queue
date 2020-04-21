@@ -164,13 +164,14 @@ def jaccard(a, b):
     print(b)
     for i in problems:
         if str(i) in a["descrip"]:
-            if str(i) in b[3]:
+            if str(i) in b[4]:
                 cp = cp + 1
             else:
                 pa = pa + 1
         elif str(i) in b[3]:
             ap = ap + 1
     sim = cp / (cp + pa + ap)
+    print(sim)
     return sim
 
 if __name__ == "__main__":
