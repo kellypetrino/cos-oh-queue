@@ -109,7 +109,7 @@
                           <!-- <form action="" method="post">
                         <p>{{form.netid(value=netid)}}</p>
                         <p>{{form.submit()}}</p></form>  -->
-                        <button onclick="{{url_for('remove', netid=netid)}};"></button>
+                        <p><a href="{{url_for('remove', netid=netid)}}" class="reply">X</a></p>
                       </td>
                     </tr>
                     {% endfor %}
