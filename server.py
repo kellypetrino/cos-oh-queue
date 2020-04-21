@@ -42,6 +42,16 @@ cursor.execute(
 )
 conn.commit()
 
+# add test students
+cursor.execute("INSERT INTO queue VALUES('test1','Test1','conc','2', '{1,3,5}')")
+conn.commit()
+cursor.execute("INSERT INTO queue VALUES('test2','Test2','debug','5', '{2,6}')")
+conn.commit()
+cursor.execute("INSERT INTO queue VALUES('test3','Test3','conc','10', '{3,4}')")
+conn.commit()
+cursor.execute("INSERT INTO queue VALUES('test4','Test4','conc','5', '{1,5}')")
+conn.commit()
+
 # Create database of instructors
 # cursor.execute("DROP TABLE IF EXISTS instructors")
 # conn.commit()
