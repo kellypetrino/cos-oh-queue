@@ -79,16 +79,8 @@
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-6 text-center heading-section ftco-animate">
-            <!-- <span class="subheading">Our Services</span> -->
-            <h3 class="mb-4">Join the Queue</h3>
-            <h5>Estimated Wait Time: {{wait}}</h5>
-          </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <h5>Sign Up</h5>
+          <div class="col-md-6 text-center heading-section">
+            <h5>Sign Up</h5>
               <form action="" method="post">
                 <p>
                   {{form.name.label}}<br>
@@ -110,53 +102,46 @@
                   {{form.submit()}}
                 </p>
               </form>
-            </div>      
           </div>
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <table>
-                <tr>
-                  <th> Name </th>
-                  <th> Problem </th>
-                  <th> Description </th>
-                  <th> Remove? </th>
-                </tr>
-                {% for netid,name,prob,time,descrip in queue %}
-                <tr>
-                  <td> {{name}} </td>
-                  <td> {{prob}} </td>
-                  <td> {{descrip}} </td>
-                  {% if netid == mynetid %}
-                  <td> 
-                    <!-- <form action="" method="post">
-                    <p>{{form2.netid(value=netid)}}</p>
-                    <p>{{form2.submit()}}</p></form>  -->
-                    <!-- <button onclick="{{url_for('remove_self', netid=mynetid)}};"></button> -->
-                    <p><a href="{{url_for('remove_self', netid=mynetid)}}" class="reply">Leave</a></p>
-                  </td>
-                  {% else %}
-                  <td></td>
-                  {% endif %}
-                </tr>
-                {% endfor %}
-              </table>
-            </div>      
+          <div class="col-md-6 text-center heading-section ftco-animate">
+            <!-- <span class="subheading">Our Services</span> -->
+            <h3 class="mb-4">Join the Queue</h3>
+            <h5>Estimated Wait Time: {{wait}}</h5>
+            <table>
+              <tr>
+                <th> Name </th>
+                <th> Problem </th>
+                <th> Description </th>
+                <th> Remove? </th>
+              </tr>
+              {% for netid,name,prob,time,descrip in queue %}
+              <tr>
+                <td> {{name}} </td>
+                <td> {{prob}} </td>
+                <td> {{descrip}} </td>
+                {% if netid == mynetid %}
+                <td> 
+                  <!-- <form action="" method="post">
+                  <p>{{form2.netid(value=netid)}}</p>
+                  <p>{{form2.submit()}}</p></form>  -->
+                  <!-- <button onclick="{{url_for('remove_self', netid=mynetid)}};"></button> -->
+                  <p><a href="{{url_for('remove_self', netid=mynetid)}}" class="reply">Leave</a></p>
+                </td>
+                {% else %}
+                <td></td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </table>
           </div>
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              
-            </div>      
-          </div>
-            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-              <div class="media block-6 services d-block text-center">
-                <h5>Meet Your Match</h5>
+          <div class="col-md-6 text-center heading-section">
+            <h5>Meet Your Match</h5>
                 {% if match %}
                   <p>Testing</p>
                   <!-- Print out the name (for now) -->
                   <p> {{match[0]}}</p>
                 {% endif %}
-              </div>      
-            </div>
+          </div>
         </div>
       </div>
     </section>
