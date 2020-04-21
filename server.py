@@ -85,7 +85,7 @@ def home():
     inqueue = True
     cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid,))
     temp = cursor.fetchone()
-    if not temp["netid"]:
+    if temp == None:
         inqueue = False
 
     # form to join queue submitted

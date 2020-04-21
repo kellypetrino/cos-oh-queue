@@ -7,6 +7,7 @@ class SignUpForm(FlaskForm):
     time = SelectField('Estimated Time', choices=[('2', 'Quick'), ('5', 'Medium'), ('10', 'Long')])
     descrip = SelectMultipleField('Description', choices=[('1', 'Testing'), ('2', 'API'), ('3', 'Data Structure'), ('4', 'Algorithm'), ('5', 'Exception'), ('6', 'Getting Started')])
     submit = SubmitField('Join Queue')
+    remove = SubmitField('X')
 
 class RemoveForm(FlaskForm):
     netid = HiddenField('netid')
