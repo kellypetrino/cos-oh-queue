@@ -1,111 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>COS Office Hour Queue</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
+  <head>
+    <title>COS Office Hours Queue</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
     
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/static/css/aos.css">
+
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/static/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/static/css/jquery.timepicker.css">
+
     
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
+    <link rel="stylesheet" href="/static/css/flaticon.css">
+    <link rel="stylesheet" href="/static/css/icomoon.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+      table {
+        /* font-family: arial, sans-serif; */
+        border-collapse: collapse;
+        width: 100%;
       }
-      .row.content {height:auto;} 
-    }
-  </style>
-</head>
-<body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">COS Office Hour Queue</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">People</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+  </head>
+  <body>
+    
+    <nav background="#fff" class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="/home">COS Office Hours Queue</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
   
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+            <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Log Out</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+      <!-- END nav -->
+    
+    <div class="hero-wrap js-fullheight">
+      <div class="overlay"></div>
+      <div id="particles-js"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Student Home</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-6 text-center heading-section ftco-animate">
+            <!-- <span class="subheading">Our Services</span> -->
+            <h2 class="mb-4">Current Queue</h2>
+            <h5>Estimated Wait Time: {{wait}}</h5>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">    
+            <div class="media block-6 services d-block text-center">
+            </div> 
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <table>
+                    <tr>
+                      <th> Name </th>
+                      <th> Problem Type </th>
+                      <th> Description </th>
+                      <th> Remove? </th>
+                    </tr>
+                    {% for name,prob,time,descrip in queue %}
+                    <tr>
+                      <td> {{name}} </td>
+                      <td> {{prob}} </td>
+                      <td> {{descrip}} </td>
+                      <td> <form action="" method="post">
+                          <p>{{form.name(value=name)}}</p>
+                          <p>{{form.submit()}}</p></form> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+            
+            </div>      
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+              
+            </div>      
+          </div>
+            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+              <div class="media block-6 services d-block text-center">
+              </div>      
+            </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>Website created by Kelly Petrino as a part of CS IW04.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    
   
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-        <p>Place Holder</p>
-    </div>
-    <div class="col-sm-8 text-left"> 
-      <h1>Current Queue</h1>
-      <h3>Estimated Wait Time: {{wait}}</h3>
-      <table>
-        <tr>
-          <th> Name </th>
-          <th> Problem Type </th>
-          <th> Description </th>
-          <th> Remove? </th>
-        </tr>
-        {% for name,prob,time,descrip in queue %}
-        <tr>
-          <td> {{name}} </td>
-          <td> {{prob}} </td>
-          <td> {{descrip}} </td>
-          <td> <form action="" method="post">
-              <p>{{form.name(value=name)}}</p>
-              <p>{{form.submit()}}</p></form> 
-            </td>
-        </tr>
-        {% endfor %}
-      </table>
-      <!-- <p>Possible metrics go here?</p> -->
-    </div>
-    <div class="col-sm-2 sidenav">
-      <p>Include hours of Office Hours?</p>
-    </div>
-  </div>
-</div>
 
-<footer class="container-fluid text-center">
-  <p></p>
-</footer>
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-</body>
+
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/static/js/popper.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/jquery.easing.1.3.js"></script>
+  <script src="/static/js/jquery.waypoints.min.js"></script>
+  <script src="/static/js/jquery.stellar.min.js"></script>
+  <script src="/static/js/owl.carousel.min.js"></script>
+  <script src="/static/js/jquery.magnific-popup.min.js"></script>
+  <script src="/static/js/aos.js"></script>
+  <script src="/static/js/jquery.animateNumber.min.js"></script>
+  <script src="/static/js/bootstrap-datepicker.js"></script>
+  <script src="/static/js/jquery.timepicker.min.js"></script>
+  <script src="/static/js/particles.min.js"></script>
+  <script src="/static/js/particle.js"></script>
+  <script src="/static/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/static/js/google-map.js"></script>
+  <script src="/static/js/main.js"></script>
+    
+  </body>
 </html>
-

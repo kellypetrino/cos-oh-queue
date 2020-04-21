@@ -93,7 +93,7 @@ def ta_portal():
     return render_template("ta_portal.html", form=form, queue=get_queue(), wait=get_wait())
 
 def get_queue():
-    cursor.execute("SELECT name, prob, time, descrip FROM queue")
+    cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
     queue = cursor.fetchall()
     return queue
 
