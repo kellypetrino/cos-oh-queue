@@ -7805,6 +7805,9 @@ h1, h2, h3, h4, h5,
   .ftco-section-featured .container {
     z-index: 2;
     position: relative; }
+  .ftco-section-featured .heading-section {
+    padding-bottom: 3em;
+  }
   .ftco-section-featured .heading-section h2 {
     font-weight: 300 !important; }
     .ftco-section-featured .heading-section h2 strong {
@@ -8406,6 +8409,10 @@ textarea.form-control {
   font-weight: 400;
   letter-spacing: 2px;
   color: rgba(0, 0, 0, 0.2); }
+
+.heading-section {
+  padding-bottom: 3em;
+}
 
 .heading-section h2 {
   font-size: 38px;
