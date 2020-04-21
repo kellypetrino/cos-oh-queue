@@ -86,27 +86,24 @@
         </div>
         <div class="row">
           <div class="col-md-4 mb-5 ftco-animate">
-            <div class="block-10 text-center">
+            <div class="block-9 text-center">
               <h5>Sign Up</h5>
               <form action="" method="post">
                 <div class="form-group">
                   {{form.name(class="form-control", placeholder="Name")}}
                 </div>
-                <p>
-                  {{form.prob.label}}<br>
-                  {{form.prob()}}
-                </p>
-                <p>
-                  {{form.time.label}}<br>
-                  {{form.time()}}
-                </p>
-                <p>
-                  {{form.descrip.label}}<br>
-                  {{form.descrip()}}
-                </p>
-                <p>
-                  {{form.submit()}}
-                </p>
+                <div class="form-group">
+                  {{form.prob(class="form-control", placeholder="Problem Type")}}
+                </div>
+                <div class="form-group">
+                  {{form.time(class="form-control", placeholder="Time")}}
+                </div>
+                <div class="form-group">
+                  {{form.descrip(class="form-control", placeholder="Description")}}
+                </div>
+                <div class="form-group">
+                  {{form.submit(class="btn btn-primary py-3 px-5" value="Join Queue")}}
+                </div>
               </form>
             </div>
           </div>
