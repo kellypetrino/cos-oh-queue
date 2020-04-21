@@ -1614,6 +1614,9 @@ pre {
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 2px); }
 
+select.form-control .multiple {
+  height: 2rem;
+}
 
 select.form-control:focus::-ms-value {
   color: #495057;
