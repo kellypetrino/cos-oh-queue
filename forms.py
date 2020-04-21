@@ -4,7 +4,7 @@ from wtforms import StringField, SelectField, SubmitField, HiddenField, SelectMu
 class SignUpForm(FlaskForm):
     name = StringField('Name')
     prob = SelectField('Problem Type', choices=[('conc','Conceptual'), ('debug', 'Debugging')])
-    time = SelectField('Estimated Time', choices=[('5', 'Quick'), ('9', 'Medium'), ('12', 'Long')])
+    time = SelectField('Estimated Time', choices=[('2', 'Quick'), ('5', 'Medium'), ('10', 'Long')])
     descrip = SelectMultipleField('Description', choices=[('1', 'Testing'), ('2', 'API'), ('3', 'Data Structure'), ('4', 'Algorithm'), ('5', 'Exception'), ('6', 'Getting Started')])
     submit = SubmitField('Join Queue')
 

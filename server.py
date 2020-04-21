@@ -45,6 +45,21 @@ conn.commit()
 # Create a key-value store of problem descriptions
 problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
 
+Create a database for the problem descritions
+cursor.execute("DROP TABLE IF EXISTS problems")
+conn.commit()
+cursor.execute(
+    """
+    CREATE TABLE problems (
+        key INTEGER NOT NULL PRIMARY KEY,
+        val VARCHAR(50) NOT NULL,
+    )"""
+)
+conn.commit() 
+for k in problems:
+    cursor.execute("INSERT INTO problems VALUES(%d, %s)", (k, problems[k]))
+    conn.commit()
+
 
 @app.route("/") 
 def main():
@@ -57,21 +72,22 @@ def home():
     netid = cas.username
     form = SignUpForm()
     form2 = RemoveForm()
-    if form.is_submitted() and form.validate():
+
+    # check if already in queue
+    inqueue = False
+    cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid))
+    temp = cursor.fetchone()
+    if temp == netid:
+        inqueue = True
+
+    
+    if form.is_submitted():
         queue = get_queue()
         result = request.form.to_dict()
         # print(type(result))
         # print(result)
         # print(form.descrip.data)
         # print(type(form.descrip.data))
-
-        # check if already in queue
-        inqueue = False
-        cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid))
-        temp = cursor.fetchone()
-        if temp == netid:
-            alertbox = True
-            return render_template("index.html", netid = cas.username, form=form, form2=form2, queue=get_queue(), wait=get_wait(), alert=alertbox)
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (str(netid), result["name"], result["prob"], result["time"], form.descrip.data))
         conn.commit()
         if len(queue) > 0: 
