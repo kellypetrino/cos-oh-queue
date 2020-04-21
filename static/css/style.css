@@ -191,7 +191,8 @@ caption {
   caption-side: bottom; }
 
 th {
-  text-align: inherit; }
+  text-align: inherit; 
+  color: #53A7A0}
 
 label {
   display: inline-block;
