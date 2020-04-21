@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 pr-md-5 ftco-animate">
+          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="block-9 text-center">
               <h5>Sign Up</h5>
               <form action="" method="post">
@@ -123,11 +123,7 @@
                   <td> {{descrip}} </td>
                   {% if netid == mynetid %}
                   <td> 
-                    <!-- <form action="" method="post">
-                    <p>{{form2.netid(value=netid)}}</p>
-                    <p>{{form2.submit()}}</p></form>  -->
-                    <!-- <button onclick="{{url_for('remove_self', netid=mynetid)}};"></button> -->
-                    <p><a href="{{url_for('remove_self', netid=mynetid)}}" class="reply">Leave</a></p>
+                    <p><a href="{{url_for('remove_self', netid=mynetid)}}" class="reply">Remove</a></p>
                   </td>
                   {% else %}
                   <td></td>
