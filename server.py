@@ -45,12 +45,7 @@ conn.commit()
 # Create database of instructors
 cursor.execute("DROP TABLE IF EXISTS instructors")
 conn.commit()
-cursor.execute(
-    """
-    CREATE TABLE instructors (
-        netid VARCHAR(50) NOT NULL PRIMARY KEY,
-    )"""
-)
+cursor.execute("CREATE TABLE instructors (netid VARCHAR(50) NOT NULL PRIMARY KEY,)")
 conn.commit()
 cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
 conn.commit()
@@ -93,7 +88,7 @@ def home():
     if temp["netid"] == netid:
         inqueue = True
 
-    
+    # form to join queue submitted
     if form.is_submitted() and not inqueue:
         queue = get_queue()
         result = request.form.to_dict()
@@ -109,10 +104,13 @@ def home():
                     sim = sim_temp
                     match = stu
             return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
+    
+    # form to remove self submitted
     elif form2.is_submitted() and inqueue:
         result = request.form
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
         conn.commit()
+    
     return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 
