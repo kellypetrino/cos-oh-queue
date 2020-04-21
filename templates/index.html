@@ -127,9 +127,11 @@
                   <td> {{prob}} </td>
                   <td> {{descrip}} </td>
                   {% if netid == mynetid %}
-                  <td> <form action="" method="post">
+                  <td> 
+                    <!-- <form action="" method="post">
                     <p>{{form2.netid(value=netid)}}</p>
-                    <p>{{form2.submit()}}</p></form> 
+                    <p>{{form2.submit()}}</p></form>  -->
+                    <button onclick="{{url_for(remove_self/mynetid)}};"></button>
                   </td>
                   {% else %}
                   <td></td>

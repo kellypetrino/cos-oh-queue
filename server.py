@@ -4,7 +4,7 @@ import urllib
 import psycopg2
 
 import flask
-from flask import Flask, render_template, session, redirect, send_from_directory, request
+from flask import Flask, render_template, session, redirect, send_from_directory, request, url_for
 from flask_cas import CAS, login_required, login, logout
 
 from flask_wtf import FlaskForm
@@ -106,23 +106,41 @@ def home():
             return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     
     # form to remove self submitted
-    elif form2.is_submitted() and inqueue:
-        result = request.form
-        cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
-        conn.commit()
+    # elif form2.is_submitted() and inqueue:
+    #     result = request.form
+    #     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
+    #     conn.commit()
     
     return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
+
+@app.route("/remove_self/<netid>", method=['POST'])
+def remove_self(netid):
+    cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
+    conn.commit()
+    redirect(url_for(home))
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
 @login_required
 def ta_portal():
-    form = RemoveForm()
-    if form.is_submitted():
-        result = request.form
-        cursor.execute("DELETE FROM queue WHERE netid = '%s'" % result["netid"])
-        conn.commit()
-    return render_template("ta_portal.html", form=form, queue=get_queue(), wait=get_wait())
+    # form = RemoveForm()
+    # if form.is_submitted():
+    #     result = request.form
+    #     cursor.execute("DELETE FROM queue WHERE netid = '%s'" % result["netid"])
+    #     conn.commit()
+    return render_template("ta_portal.html", queue=get_queue(), wait=get_wait())
+
+@app.route("/remove/<netid>", method=['POST'])
+def remove(netid):
+    cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
+    conn.commit()
+    redirect(url_for(ta_portal))
+
+@app.route("/remove_all", method=['POST'])
+def remove_all():
+    cursor.execute("DELETE * FROM queue")
+    conn.commit()
+    redirect(url_for(ta_portal))
 
 def get_queue():
     cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
