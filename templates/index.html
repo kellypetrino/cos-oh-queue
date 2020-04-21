@@ -97,7 +97,7 @@
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="block-10 text-center">
-              <h5>Sign Up</h5>
+              <h4>Sign Up</h4>
               <form action="" method="post">
                 <div class="form-group">
                   {{form.name(class="form-control", placeholder="Name")}}
@@ -108,8 +108,8 @@
                 <div class="form-group">
                   {{form.time(class="form-control", placeholder="Time")}}
                 </div>
-                <div class="select-picker">
-                  {{form.descrip(class="form-control", height="5em", placeholder="Description")}}
+                <div class="form-group">
+                  {{form.descrip(class="form-control select-picker", height="5em", placeholder="Description")}}
                 </div>
                 <div class="form-group">
                   {{form.submit(class="btn btn-primary btn-outline-primary py-3 px-5", value="Join Queue")}}
@@ -141,10 +141,16 @@
           </div>
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="block-10 text-center">
-              <h5>Meet Your Match</h5>
+              <h4>Meet Your Match</h4>
                 {% if match %}
-                  <p>Testing</p>
                   <!-- Print out the name (for now) -->
+                  <div class="block-10">
+                    <div class="person-info mb-2">
+                      <span class="name">{{match[1]}}</span>
+                      <span class="position">NetID: {{match[0]}}</span>
+                    </div>
+                    <p>Common Problems: ...</p>
+                  </div>
                   <p> {{match[0]}}</p>
                 {% endif %}
             </div>
