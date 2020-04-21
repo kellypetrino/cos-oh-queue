@@ -50,7 +50,7 @@ def main():
 
 
 @app.route("/home", methods=['GET','POST'])
-# @login_required
+@login_required
 def home():
     form = SignUpForm()
     form2 = RemoveForm()
@@ -79,7 +79,7 @@ def home():
         result = request.form
         cursor.execute("DELETE FROM queue WHERE netid = '%s'" % cas.username)
         conn.commit()
-    return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait())
+    return render_template("index.html", netid = cas.username, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
 
 @app.route("/ta_portal", methods=['GET','POST'])
