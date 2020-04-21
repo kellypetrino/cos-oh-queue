@@ -75,7 +75,7 @@ def home():
 
     # check if already in queue
     inqueue = False
-    cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid))
+    cursor.execute("SELECT netid FROM queue where netid = (%s)", (netid,))
     temp = cursor.fetchone()
     if temp == netid:
         inqueue = True
@@ -98,7 +98,7 @@ def home():
             return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
     elif form2.is_submitted() and inqueue:
         result = request.form
-        cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid))
+        cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
         conn.commit()
     return render_template("index.html", netid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
