@@ -46,19 +46,19 @@ conn.commit()
 problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
 
 # Create a database for the problem descritions
-cursor.execute("DROP TABLE IF EXISTS problems")
-conn.commit()
-cursor.execute(
-    """
-    CREATE TABLE problems (
-        key INTEGER NOT NULL PRIMARY KEY,
-        val VARCHAR(50) NOT NULL,
-    )"""
-)
-conn.commit() 
-for k in problems:
-    cursor.execute("INSERT INTO problems VALUES(%d, %s)", (k, problems[k]))
-    conn.commit()
+# cursor.execute("DROP TABLE IF EXISTS problems")
+# conn.commit()
+# cursor.execute(
+#     """
+#     CREATE TABLE problems (
+#         key INTEGER NOT NULL PRIMARY KEY,
+#         val VARCHAR(50) NOT NULL,
+#     )"""
+# )
+# conn.commit() 
+# for k in problems:
+#     cursor.execute("INSERT INTO problems VALUES(%d, %s)", (k, problems[k]))
+#     conn.commit()
 
 
 @app.route("/") 
@@ -96,9 +96,9 @@ def home():
                     sim = sim_temp
                     match = stu
             return render_template("index.html", form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
-    elif form2.is_submitted():
+    elif form2.is_submitted() and inqueue:
         result = request.form
-        cursor.execute("DELETE FROM queue WHERE netid = '%s'" % cas.username)
+        cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid))
         conn.commit()
     return render_template("index.html", netid = cas.username, form=form, form2=form2, queue=get_queue(), wait=get_wait())
 
@@ -114,7 +114,7 @@ def ta_portal():
     return render_template("ta_portal.html", form=form, queue=get_queue(), wait=get_wait())
 
 def get_queue():
-    cursor.execute("SELECT name, prob, time, descrip FROM queue")
+    cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
     queue = cursor.fetchall()
     return queue
 
