@@ -1459,10 +1459,6 @@ pre {
 .table-light > td {
   background-color: #fdfdfe; }
 
-.table-light > th {
-  color: #53A7A0;
-}
-
 .table-hover .table-light:hover {
   background-color: #ececf6; }
   .table-hover .table-light:hover > td,
