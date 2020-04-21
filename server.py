@@ -138,8 +138,10 @@ def remove(netid):
 
 @app.route("/remove_all")
 def remove_all():
-    cursor.execute("DELETE * FROM queue")
-    conn.commit()
+    queue = get_queue()
+    for stu in queue:
+        cursor.execute("DELETE FROM queue WHERE netid = (%s)", (stu[0]))
+        conn.commit()
     return redirect(url_for('ta_portal'))
 
 def get_queue():
