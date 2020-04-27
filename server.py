@@ -19,7 +19,7 @@ app.config['CAS_AFTER_LOGOUT'] = '/'
 
 netid = ""
 
-matches = {}
+matches = {'Test1':'Test1', 'Test2':'Test2', 'Test3':'Test3', 'Test4':'Test4'}
 
  
 # conn = psycopg2.connect(host="localhost",database="ohlocal", user="postgres", password="sqlpass")
