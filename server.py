@@ -55,7 +55,12 @@ conn.commit()
 # Create database of instructors
 cursor.execute("DROP TABLE IF EXISTS instructors")
 conn.commit()
-cursor.execute("CREATE TABLE instructors (netid VARCHAR(50) NOT NULL PRIMARY KEY,)")
+cursor.execute(
+    """
+    CREATE TABLE instructors (
+        netid VARCHAR(50) NOT NULL PRIMARY KEY,
+    )"""
+)
 conn.commit()
 cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
 conn.commit()
@@ -88,7 +93,6 @@ def main():
 @login_required
 def home():
     netid = str(cas.username)
-    netid = 'kpetrino'
     form = SignUpForm()
     form2 = RemoveForm()
 
