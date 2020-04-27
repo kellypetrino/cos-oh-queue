@@ -112,6 +112,10 @@ def home():
     temp = cursor.fetchone()
     if temp == None:
         inqueue = False
+    else: 
+        match = matches[netid]
+        return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait(), match=match) 
+
 
     # form to join queue submitted
     if form.is_submitted() and not inqueue:
@@ -129,6 +133,7 @@ def home():
                 if sim_temp > sim:
                     sim = sim_temp
                     match = stu
+            matches[netid] = match
             return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait(), match=match) 
     
     return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait())
@@ -152,6 +157,7 @@ def ta_portal():
 def remove(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
+    del matches[netid]
     return redirect(url_for('ta_portal'))
 
 @app.route("/remove_all")
@@ -160,6 +166,7 @@ def remove_all():
     for stu in queue:
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (stu[0],))
         conn.commit()
+        del matches[stu[0]]
     return redirect(url_for('ta_portal'))
 
 def get_queue():
