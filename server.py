@@ -53,17 +53,17 @@ cursor.execute("INSERT INTO queue VALUES('test4','Test4','conc','5', '{1,5}')")
 conn.commit()
 
 # Create database of instructors
-cursor.execute("DROP TABLE IF EXISTS instructors")
-conn.commit()
-cursor.execute(
-    """
-    CREATE TABLE instructors (
-        netid VARCHAR(50) NOT NULL PRIMARY KEY
-    )"""
-)
-conn.commit()
-cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
-conn.commit()
+# cursor.execute("DROP TABLE IF EXISTS instructors")
+# conn.commit()
+# cursor.execute(
+#     """
+#     CREATE TABLE instructors (
+#         netid VARCHAR(50) NOT NULL PRIMARY KEY
+#     )"""
+# )
+# conn.commit()
+# cursor.execute("INSERT INTO instructors VALUES(%s)", ('kpetrino',))
+# conn.commit()
 
 # Create a key-value store of problem descriptions
 problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
@@ -75,7 +75,7 @@ problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Ex
 #     """
 #     CREATE TABLE problems (
 #         key INTEGER NOT NULL PRIMARY KEY,
-#         val VARCHAR(50) NOT NULL,
+#         val VARCHAR(50) NOT NULL
 #     )"""
 # )
 # conn.commit() 
@@ -94,16 +94,15 @@ def main():
 def home():
     netid = str(cas.username)
 
+    # redirect instructors to ta portal
     cursor.execute("SELECT netid FROM instructors WHERE netid = (%s)", (netid,))
     isInstructor = True
     if cursor.fetchone() == None:
         isInstructor = False
-    
-    if isInstructor:
+    if isInstructor and netid != 'kpetrino':
         return redirect(url_for('ta_portal'))
 
     form = SignUpForm()
-    form2 = RemoveForm()
 
     # check if already in queue
     inqueue = True
@@ -128,9 +127,9 @@ def home():
                 if sim_temp > sim:
                     sim = sim_temp
                     match = stu
-            return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait(), match=match) 
+            return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait(), match=match) 
     
-    return render_template("index.html", mynetid=netid, form=form, form2=form2, queue=get_queue(), wait=get_wait())
+    return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait())
 
 @app.route("/remove_self/<netid>")
 def remove_self(netid):
@@ -177,12 +176,12 @@ def jaccard(a, b):
     print(a)
     print(b)
     for i in problems:
-        if str(i) in a["descrip"]:
-            if str(i) in b[4]:
+        if str(problems[i]) in a["descrip"]:
+            if str(problems[i]) in b[4]:
                 cp = cp + 1
             else:
                 pa = pa + 1
-        elif str(i) in b[3]:
+        elif str(problems[i]) in b[3]:
             ap = ap + 1
     sim = cp / (cp + pa + ap)
     print(sim)
