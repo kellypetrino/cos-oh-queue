@@ -135,7 +135,7 @@ def home():
                     match = stu
             matches[netid] = match
             return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait(), match=match) 
-        else: 
+        else:
             matches[netid] = netid
     
     return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait())
@@ -159,7 +159,7 @@ def ta_portal():
 def remove(netid):
     cursor.execute("DELETE FROM queue WHERE netid = (%s)", (netid,))
     conn.commit()
-    del matches[netid]
+    # del matches[netid]
     return redirect(url_for('ta_portal'))
 
 @app.route("/remove_all")
@@ -168,7 +168,7 @@ def remove_all():
     for stu in queue:
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (stu[0],))
         conn.commit()
-        del matches[stu[0]]
+        # del matches[stu[0]]
     return redirect(url_for('ta_portal'))
 
 def get_queue():
