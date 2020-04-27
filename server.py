@@ -135,6 +135,8 @@ def home():
                     match = stu
             matches[netid] = match
             return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait(), match=match) 
+        else: 
+            matches[netid] = netid
     
     return render_template("index.html", mynetid=netid, form=form, queue=get_queue(), wait=get_wait())
 
