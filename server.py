@@ -45,13 +45,13 @@ cursor.execute(
 conn.commit()
 
 # add test students
-cursor.execute("INSERT INTO queue VALUES('test1','Test1','Conceptual','2', '{Testing,Data Structures,Exception}')")
+cursor.execute("INSERT INTO queue VALUES('test1','Test1','Conceptual','5', '{API,Data Structures,Getting Started}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test2','Test2','Debugging','5', '{API,Getting Started}')")
+cursor.execute("INSERT INTO queue VALUES('test2','Test2','Conceptual','2', '{Testing,API,Getting Started}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test3','Test3','Conceptual','10', '{Data Structures,Algorithm}')")
+cursor.execute("INSERT INTO queue VALUES('test3','Test3','Debugging','5', '{Testing,Exception}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test4','Test4','Conceptual','5', '{Testing,Exception}')")
+cursor.execute("INSERT INTO queue VALUES('test4','Test4','Conceptual','5', '{Testing,Getting Started}')")
 conn.commit()
 
 # Create database of instructors
