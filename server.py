@@ -116,7 +116,6 @@ def home():
         queue = get_queue()
         result = request.form.to_dict()
         result["descrip"] = form.descrip.data
-        print(form.descrip.data)
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, form.name.data, form.prob.data, form.time.data, form.descrip.data))
         conn.commit()
         # get match 

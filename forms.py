@@ -5,7 +5,7 @@ class SignUpForm(FlaskForm):
     name = StringField('Name')
     prob = SelectField('Problem Type', choices=[('Conceptual','Conceptual'), ('Debugging', 'Debugging')])
     time = SelectField('Estimated Time', choices=[('2', 'Quick'), ('5', 'Medium'), ('10', 'Long')])
-    descrip = SelectMultipleField('Description', choices=[('Testing', 'Testing'), ('API', 'API'), ('Data Structures', 'Data Structure'), ('Algorithm', 'Algorithm'), ('Exception', 'Exception'), ('Getting Started', 'Getting Started')])
+    descrip = SelectMultipleField('Description', choices=[(' Testing ', 'Testing'), ('API', 'API'), (' Data Structures ', 'Data Structure'), (' Algorithm ', 'Algorithm'), ('  Exception ', 'Exception'), (' Getting Started ', 'Getting Started')])
     submit = SubmitField('Join Queue')
     remove = SubmitField('X')
 
