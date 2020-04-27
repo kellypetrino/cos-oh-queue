@@ -8,7 +8,7 @@ from flask import Flask, render_template, session, redirect, send_from_directory
 from flask_cas import CAS, login_required, login, logout
 
 from flask_wtf import FlaskForm
-from forms import SignUpForm, RemoveForm
+from forms import SignUpForm, RemoveForm, AddTAForm
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -116,6 +116,7 @@ def home():
         queue = get_queue()
         result = request.form.to_dict()
         result["descrip"] = form.descrip.data
+        print(form.descrip.data)
         cursor.execute("INSERT INTO queue VALUES (%s, %s, %s, %s, %s)", (netid, form.name.data, form.prob.data, form.time.data, form.descrip.data))
         conn.commit()
         # get match 
@@ -141,7 +142,10 @@ def remove_self(netid):
 @app.route("/ta_portal", methods=['GET','POST'])
 @login_required
 def ta_portal():
-    return render_template("ta_portal.html", queue=get_queue(), wait=get_wait())
+    form = AddTAForm()
+    if form.is_submitted():
+        cursor.execute("INSERT INTO instructors VALES (%s)", (form.netid.data,))
+    return render_template("ta_portal.html", queue=get_queue(), wait=get_wait(), form=form)
 
 @app.route("/remove/<netid>")
 def remove(netid):
@@ -155,12 +159,6 @@ def remove_all():
     for stu in queue:
         cursor.execute("DELETE FROM queue WHERE netid = (%s)", (stu[0],))
         conn.commit()
-    return redirect(url_for('ta_portal'))
-
-@app.route("/add_ta/<netid>")
-def add_ta(netid):
-    cursor.execute("INSERT INTO instructors VALUES(%s)", (netid,))
-    cursor.commit()
     return redirect(url_for('ta_portal'))
 
 def get_queue():

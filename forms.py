@@ -12,3 +12,7 @@ class SignUpForm(FlaskForm):
 class RemoveForm(FlaskForm):
     netid = HiddenField('netid')
     submit = SubmitField('X')
+
+class AddTAForm(FlaskForm):
+    netid = StringField('NetID')
+    submit = SubmitField('Add Instructor')
