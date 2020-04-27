@@ -43,13 +43,13 @@ cursor.execute(
 conn.commit()
 
 # add test students
-cursor.execute("INSERT INTO queue VALUES('test1','Test1','conc','2', '{1,3,5}')")
+cursor.execute("INSERT INTO queue VALUES('test1','Test1','Conceptual','2', '{Testing,Data Structures,Exception}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test2','Test2','debug','5', '{2,6}')")
+cursor.execute("INSERT INTO queue VALUES('test2','Test2','Debugging','5', '{API,Getting Started}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test3','Test3','conc','10', '{3,4}')")
+cursor.execute("INSERT INTO queue VALUES('test3','Test3','Conceptual','10', '{Data Structures,Algorithm}')")
 conn.commit()
-cursor.execute("INSERT INTO queue VALUES('test4','Test4','conc','5', '{1,5}')")
+cursor.execute("INSERT INTO queue VALUES('test4','Test4','Conceptual','5', '{Testing,Exception}')")
 conn.commit()
 
 # Create database of instructors
@@ -144,7 +144,7 @@ def remove_self(netid):
 def ta_portal():
     form = AddTAForm()
     if form.is_submitted():
-        cursor.execute("INSERT INTO instructors VALES (%s)", (form.netid.data,))
+        cursor.execute("INSERT INTO instructors VALUES (%s)", (form.netid.data,))
     return render_template("ta_portal.html", queue=get_queue(), wait=get_wait(), form=form)
 
 @app.route("/remove/<netid>")
