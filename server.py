@@ -195,7 +195,7 @@ def jaccard(a, b):
                 cp = cp + 1
             else:
                 pa = pa + 1
-        elif str(i) in b[3]:
+        elif str(i) in b[4]:
             ap = ap + 1
     sim = cp / (cp + pa + ap)
     print(sim)
