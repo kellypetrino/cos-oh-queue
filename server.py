@@ -93,6 +93,15 @@ def main():
 @login_required
 def home():
     netid = str(cas.username)
+
+    cursor.execute("SELECT netid FROM instructors WHERE netid = (%s)", (netid,))
+    isInstructor = True
+    if cursor.fetchone() == None:
+        isInstructor = False
+    
+    if isInstructor:
+        redirect(url_for(ta_portal))
+
     form = SignUpForm()
     form2 = RemoveForm()
 
