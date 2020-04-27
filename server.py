@@ -58,7 +58,7 @@ conn.commit()
 cursor.execute(
     """
     CREATE TABLE instructors (
-        netid VARCHAR(50) NOT NULL PRIMARY KEY,
+        netid VARCHAR(50) NOT NULL PRIMARY KEY
     )"""
 )
 conn.commit()
