@@ -66,7 +66,7 @@ conn.commit()
 # conn.commit()
 
 # Create a key-value store of problem descriptions
-problems = {1: 'Testing', 2: 'API', 3: 'Data Structures', 4: 'Algorithm', 5: 'Exception', 6: 'Getting Started'}
+problems = ['Testing','API','Data Structures','Algorithm','Exception','Getting Started']
 
 # Create a database for the problem descritions
 # cursor.execute("DROP TABLE IF EXISTS problems")
@@ -157,6 +157,12 @@ def remove_all():
         conn.commit()
     return redirect(url_for('ta_portal'))
 
+@app.route("/add_ta/<netid>")
+def add_ta(netid):
+    cursor.execute("INSERT INTO instructors VALUES(%s)", (netid,))
+    cursor.commit()
+    return redirect(url_for('ta_portal'))
+
 def get_queue():
     cursor.execute("SELECT netid, name, prob, time, descrip FROM queue")
     queue = cursor.fetchall()
@@ -176,12 +182,12 @@ def jaccard(a, b):
     print(a)
     print(b)
     for i in problems:
-        if str(problems[i]) in a["descrip"]:
-            if str(problems[i]) in b[4]:
+        if str(i) in a["descrip"]:
+            if str(i) in b[4]:
                 cp = cp + 1
             else:
                 pa = pa + 1
-        elif str(problems[i]) in b[3]:
+        elif str(i) in b[3]:
             ap = ap + 1
     sim = cp / (cp + pa + ap)
     print(sim)
