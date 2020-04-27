@@ -100,7 +100,7 @@ def home():
         isInstructor = False
     
     if isInstructor:
-        redirect(url_for(ta_portal))
+        return redirect(url_for(ta_portal))
 
     form = SignUpForm()
     form2 = RemoveForm()
