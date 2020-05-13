@@ -156,10 +156,7 @@ def remove_self(netid):
 def ta_portal():
     # redirect students to student home
     cursor.execute("SELECT netid FROM instructors WHERE netid = (%s)", (netid,))
-    isInstructor = True
     if cursor.fetchone() == None:
-        isInstructor = False
-    if isInstructor == False:
         return redirect(url_for('home'))
 
     form = AddTAForm()
