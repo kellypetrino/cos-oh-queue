@@ -105,7 +105,7 @@ def home():
     isInstructor = True
     if cursor.fetchone() == None:
         isInstructor = False
-    if isInstructor and (netid != 'kpetrino' or netid != 'rfish'):
+    if isInstructor and netid != 'kpetrino' and netid != 'rfish':
         return redirect(url_for('ta_portal'))
 
     form = SignUpForm()
