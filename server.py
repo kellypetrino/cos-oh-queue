@@ -159,7 +159,7 @@ def ta_portal():
     isInstructor = True
     if cursor.fetchone() == None:
         isInstructor = False
-    if (not isInstructor) and (netid != 'kpetrino' or netid != 'rfish'):
+    if (not isInstructor) and netid != 'kpetrino' and netid != 'rfish':
         return redirect(url_for('home'))
 
     form = AddTAForm()
