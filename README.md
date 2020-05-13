@@ -1,1 +1,2 @@
-# OH-Queue
+# COS Office Hours Queue
+The COS Office Hours Queue allows students to join a virtual queue to receive help during office hours. In addition to its surface functionality of improving the current queuing system of writing names on a crowded board, the COS Office Hours Queue matches students with similar questions together so that they can actively work on their problems with others while waiting for additional help. The application aims to make the office hours experience more simplistic and worthwhile for everyone involved and end the existing chaos that frequently ensues in Friend 010. 
