@@ -101,7 +101,7 @@ def home():
     isInstructor = True
     if cursor.fetchone() == None:
         isInstructor = False
-    if isInstructor and netid != 'kpetrino':
+    if isInstructor and (netid != 'kpetrino' or netid != 'rfish'):
         return redirect(url_for('ta_portal'))
 
     form = SignUpForm()
@@ -150,6 +150,14 @@ def remove_self(netid):
 @app.route("/ta_portal", methods=['GET','POST'])
 @login_required
 def ta_portal():
+    # redirect students to student home
+    cursor.execute("SELECT netid FROM instructors WHERE netid = (%s)", (netid,))
+    isInstructor = True
+    if cursor.fetchone() == None:
+        isInstructor = False
+    if (not isInstructor) and (netid != 'kpetrino' or netid != 'rfish'):
+        return redirect(url_for('home'))
+
     form = AddTAForm()
     if form.is_submitted():
         cursor.execute("INSERT INTO instructors VALUES (%s)", (form.netid.data,))
