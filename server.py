@@ -159,7 +159,7 @@ def ta_portal():
     isInstructor = True
     if cursor.fetchone() == None:
         isInstructor = False
-    if not isInstructor:
+    if isInstructor == False:
         return redirect(url_for('home'))
 
     form = AddTAForm()
